@@ -1,4 +1,4 @@
-package kr.co.galaxy.galaxyapppilates;
+package kr.co.galaxy.app.pilates;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
