@@ -1,4 +1,4 @@
-package kr.co.galaxy.galaxyapppilates;
+package kr.co.galaxy.app.pilates;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
