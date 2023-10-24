@@ -1,7 +1,6 @@
 package kr.co.galaxy.app.pilates.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.Date;
@@ -11,6 +10,8 @@ import java.util.Date;
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
     private String name;
     private String sex;
