@@ -19,5 +19,11 @@ public class CustomerService {
         Customer customer =  repository.save(request.toCustomer());
         return CustomerResponse.of(customer);
     }
+    public CustomerResponse findCustomerResponseById(int id){
+        return CustomerResponse.of(findById(id));
+    }
+    public Customer findById(int id){
+        return repository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
 
 }
