@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("customer")
@@ -16,14 +17,14 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<Void> createCustomer(@RequestBody CustomerRequest request){
         CustomerResponse customer = customerService.createCustomer(request);
         return ResponseEntity.created(URI.create("/customer/"+customer.getId())).build();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable int id){
-        CustomerResponse response = customerService.findCustomerResponseById(id);
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable UUID id){
+        CustomerResponse response = customerService.findCustomerById(id);
         return ResponseEntity.ok(response);
     }
 }
