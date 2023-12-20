@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -15,14 +17,15 @@ public class CustomerService {
 
     private final CustomerRepository repository;
 
+    @Transactional(readOnly = false)
     public CustomerResponse createCustomer(CustomerRequest request){
         Customer customer =  repository.save(request.toCustomer());
         return CustomerResponse.of(customer);
     }
-    public CustomerResponse findCustomerResponseById(int id){
+    public CustomerResponse findCustomerById(UUID id){
         return CustomerResponse.of(findById(id));
     }
-    public Customer findById(int id){
+    public Customer findById(UUID id){
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 

@@ -4,15 +4,16 @@ import kr.co.galaxy.app.pilates.domain.Customer;
 import lombok.Getter;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 public class CustomerResponse {
-    private int id;
+    private UUID id;
     private String name;
     private String status;
 
 
-    public CustomerResponse(int id, String name, String status) {
+    public CustomerResponse(UUID id, String name, String status) {
         this.id = id;
         this.name = name;
         this.status = status;
