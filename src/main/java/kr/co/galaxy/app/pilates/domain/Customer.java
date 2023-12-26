@@ -1,20 +1,23 @@
 package kr.co.galaxy.app.pilates.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Getter;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Customer {
 
     @Id
-    @UuidGenerator
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
     @Column(name = "ID", columnDefinition = "BINARY(16)")
     private UUID id;
     private String name;
@@ -29,7 +32,4 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    protected Customer() {
-
-    }
 }
