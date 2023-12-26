@@ -3,6 +3,8 @@ package kr.co.galaxy.app.pilates.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import kr.co.galaxy.app.pilates.application.dto.CustomerRequest;
+import kr.co.galaxy.app.pilates.common.AuditEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Customer {
+public class Customer extends AuditEntity {
 
     @Id
     @UuidGenerator(style = UuidGenerator.Style.TIME)
@@ -30,6 +32,12 @@ public class Customer {
         this.name = name;
         this.sex = sex;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void update(CustomerRequest request){
+        this.name = request.getName();
+        this.sex = request.getSex();
+        this.dateOfBirth = request.getDateOfBirth();
     }
 
 }

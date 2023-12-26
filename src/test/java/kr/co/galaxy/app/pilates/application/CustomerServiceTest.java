@@ -2,6 +2,7 @@ package kr.co.galaxy.app.pilates.application;
 
 import kr.co.galaxy.app.pilates.application.dto.CustomerRequest;
 import kr.co.galaxy.app.pilates.application.dto.CustomerResponse;
+import kr.co.galaxy.app.pilates.domain.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,31 @@ class CustomerServiceTest extends AcceptanceTest{
 
         CustomerResponse response = customerService.createCustomer(request);
         assertThat(response.getId().toString().length()).isEqualTo(36);
+
+    }
+
+    @Test
+    @DisplayName("회원의 데이터를 수정한다.")
+    void updateCustomer(){
+        CustomerRequest requestCreate = CustomerRequest.builder()
+                .name("홍길동")
+                .sex("m")
+                .dateOfBirth(LocalDate.parse("1990-01-01"))
+                .build();
+
+        CustomerResponse response = customerService.createCustomer(requestCreate);
+
+        CustomerRequest requestUpdate = CustomerRequest.builder()
+                .name("유비")
+                .build();
+
+        customerService.updateCustomer(response.getId(), requestUpdate);
+
+        Customer customer = customerService.findById(response.getId());
+
+        assertThat(customer.getName()).isEqualTo("유비");
+        assertThat(customer.getSex()).isNotNull();
+
 
     }
 
