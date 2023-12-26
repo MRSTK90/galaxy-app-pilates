@@ -29,4 +29,11 @@ public class CustomerService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Transactional(readOnly = false)
+    public void updateCustomer(UUID id, CustomerRequest request){
+        Customer customer = findById(id);
+        customer.update(request);
+        repository.update(customer);
+    }
+
 }

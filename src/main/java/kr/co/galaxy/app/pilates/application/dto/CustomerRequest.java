@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.UUID;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerRequest {
+    private UUID id;
     private String name;
     private String sex;
     private LocalDate dateOfBirth;
