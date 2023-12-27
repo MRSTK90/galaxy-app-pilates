@@ -17,7 +17,7 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<Void> createCustomer(@RequestBody CustomerRequest request){
         CustomerResponse customer = customerService.createCustomer(request);
         return ResponseEntity.created(URI.create("/customer/"+customer.getId())).build();
@@ -26,5 +26,11 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> getCustomer(@PathVariable UUID id){
         CustomerResponse response = customerService.findCustomerById(id);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable UUID id, @RequestBody CustomerRequest request){
+        customerService.updateCustomer(id, request);
+        return ResponseEntity.ok().build();
     }
 }

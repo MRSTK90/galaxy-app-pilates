@@ -33,7 +33,6 @@ public class CustomerService {
     public void updateCustomer(UUID id, CustomerRequest request){
         Customer customer = findById(id);
         customer.update(request);
-        repository.update(customer);
     }
 
 }

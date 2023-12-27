@@ -13,7 +13,6 @@ import java.time.LocalDate;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class Description
@@ -45,11 +44,51 @@ class CustomerControllerTest extends AcceptanceTest {
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
+        System.out.println(response.header("location"));
+
 
     }
 
     @Test
     @DisplayName("회원 조회 테스트")
     void getCustomer() {
+    }
+
+    @Test
+    @DisplayName("회원 수정 테스트")
+    void updateCustomer() {
+
+
+        CustomerRequest request = CustomerRequest.builder()
+                .name("홍길동")
+                .sex("m")
+                .dateOfBirth(LocalDate.parse("1990-01-01"))
+                .build();
+
+
+        ExtractableResponse<Response> response = given().log().all()
+                .body(request)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().post("customer/create")
+                .then().log().all().extract();
+
+        String id = response.header("location").split("/customer/")[1];
+
+        CustomerRequest request2 = CustomerRequest.builder()
+                .name("김영희")
+                .sex("w")
+                .dateOfBirth(LocalDate.parse("1990-04-11"))
+                .build();
+
+
+        ExtractableResponse<Response> response2 = given().log().all()
+                .body(request2)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().put("customer/update/{id}", id)
+                .then().log().all().extract();
+
+        //then
+        assertThat(response2.statusCode()).isEqualTo(HttpStatus.OK.value());
+
     }
 }
