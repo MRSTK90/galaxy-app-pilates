@@ -55,6 +55,8 @@ class CustomerServiceTest extends AcceptanceTest{
 
         CustomerRequest requestUpdate = CustomerRequest.builder()
                 .name("유비")
+                .sex("m")
+                .dateOfBirth(LocalDate.parse("1990-11-01"))
                 .build();
 
         customerService.updateCustomer(response.getId(), requestUpdate);
@@ -62,7 +64,9 @@ class CustomerServiceTest extends AcceptanceTest{
         Customer customer = customerService.findById(response.getId());
 
         assertThat(customer.getName()).isEqualTo("유비");
-        assertThat(customer.getSex()).isNotNull();
+        assertThat(customer.getSex()).isEqualTo("m");
+        assertThat(customer.getDateOfBirth()).isEqualTo(LocalDate.parse("1990-11-01"));
+        assertThat(customer.getUpdatedDate()).isNotNull();
 
 
     }
