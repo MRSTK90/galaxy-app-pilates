@@ -1,7 +1,9 @@
 package kr.co.galaxy.app.pilates.application.dto;
 
 import kr.co.galaxy.app.pilates.domain.Counsel;
+import lombok.Getter;
 
+@Getter
 public class CounselResponse {
 
     private int id;
